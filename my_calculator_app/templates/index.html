@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <!-- Підключення зовнішнього CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Калькулятор</h1>
+        <form action="/calculate" method="POST">
+            <label for="num1">Перше число:</label>
+            <input type="text" name="num1" id="num1" required>
+
+            <label for="num2">Друге число:</label>
+            <input type="text" name="num2" id="num2" required>
+
+            <label for="operation">Операція:</label>
+            <select name="operation" id="operation">
+                <option value="add">Додавання</option>
+                <option value="subtract">Віднімання</option>
+                <option value="multiply">Множення</option>
+                <option value="divide">Ділення</option>
+            </select>
+
+            <button type="submit">Обчислити</button>
+        </form>
+
+        {% if result is not none %}
+        <div class="result">
+            Результат: {% if result == "Помилка! Ділення на нуль." %}
+            <span class="error">{{ result }}</span> {% else %} {{ result }} {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
